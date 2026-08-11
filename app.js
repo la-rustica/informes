@@ -84,12 +84,20 @@ function setupRecognition(){
   rec.continuous = true;
   rec.interimResults = true;
   let finalText = '';
+  let lastFinal = '';
   rec.onresult = (e)=>{
     let interim = '';
     for(let i = e.resultIndex; i < e.results.length; i++){
       const t = e.results[i][0].transcript;
-      if(e.results[i].isFinal) finalText += t + ' ';
-      else interim += t;
+      if(e.results[i].isFinal){
+        const chunk = t.trim();
+        if(chunk && chunk !== lastFinal){
+          finalText += t + ' ';
+          lastFinal = chunk;
+        }
+      } else {
+        interim += t;
+      }
     }
     document.getElementById('transcriptBox').value = (finalText + interim).trim();
   };
