@@ -83,17 +83,19 @@ function setupRecognition(){
   rec.lang = 'es-PY';
   rec.continuous = true;
   rec.interimResults = true;
+  const normalize = s => s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
   let finalText = '';
-  let lastFinal = '';
+  let lastFinalNorm = '';
   rec.onresult = (e)=>{
     let interim = '';
     for(let i = e.resultIndex; i < e.results.length; i++){
       const t = e.results[i][0].transcript;
       if(e.results[i].isFinal){
         const chunk = t.trim();
-        if(chunk && chunk !== lastFinal){
+        const norm = normalize(chunk);
+        if(chunk && norm && norm !== lastFinalNorm){
           finalText += t + ' ';
-          lastFinal = chunk;
+          lastFinalNorm = norm;
         }
       } else {
         interim += t;
