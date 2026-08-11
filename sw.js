@@ -1,4 +1,4 @@
-const CACHE = 'la-rustica-v1';
+const CACHE = 'la-rustica-v2';
 const SHELL = ['./', './index.html', './app.js', './config.js', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e=>{
