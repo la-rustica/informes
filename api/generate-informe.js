@@ -47,7 +47,7 @@ El campo "informe" debe incluir, cuando la información esté disponible: fecha 
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-1',
+        model: 'claude-opus-5',
         max_tokens: 1500,
         system: systemPrompt,
         messages: [{ role: 'user', content: userContent }]
